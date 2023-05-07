@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
         [username, name, phone, email, password]
     );
 
-    res.json(result[0]);
+    res.json({result});
 });
 
 // Get user data
