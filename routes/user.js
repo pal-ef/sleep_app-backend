@@ -10,10 +10,10 @@ router.get('/', async(req, res) => {
 
 // Create new user
 router.post("/", async (req, res) => {
-    const {firstName, lastName, phone, email, password} = req.body;
+    const {username, name, phone, email, password} = req.body;
     const [result] = await pool.query(
-        `INSERT INTO users (firstName, lastName, phone, email, password) VALUES(?,?,?,?,?)`,
-        [firstName, lastName, phone, email, password]
+        `INSERT INTO users (username, name, phone, email, password) VALUES(?,?,?,?,?)`,
+        [username, name, phone, email, password]
     );
     res.json(result[0]);
 });
