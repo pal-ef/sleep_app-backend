@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
     if(result[0]) {
         res.json(result[0]);
     } else {
-        res.json({message: "There was a problem creating the account"});
+        res.json({message: "There was a problem creating the account", result});
     }
 });
 
