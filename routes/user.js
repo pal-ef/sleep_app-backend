@@ -11,7 +11,11 @@ router.post("/credentials", async (req, res) => {
         "SELECT * FROM users WHERE username = ? AND password = ?",
         [username, password]
     );
-    res.json(result[0]);
+    if(result[0]) {
+        res.json(result[0]);
+    } else {
+        res.json({message:"user not found"});
+    }
 });
 
 // Get all users
