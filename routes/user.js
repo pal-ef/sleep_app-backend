@@ -32,11 +32,7 @@ router.post("/", async (req, res) => {
         [username, name, phone, email, password]
     );
 
-    if(result[0]) {
-        res.json(result[0]);
-    } else {
-        res.json({message: "There was a problem creating the account", result});
-    }
+    res.json(result[0]);
 });
 
 // Get user data
