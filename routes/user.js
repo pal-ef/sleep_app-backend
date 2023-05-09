@@ -17,8 +17,12 @@ router.post("/", async (req, res) => {
         `INSERT INTO users (username, name, phone, email, password) VALUES(?,?,?,?,?)`,
         [username, name, phone, email, password]
     );
-    console.log(result)
-    res.status(200).send("User was created");
+    
+    if(result) {
+        res.json({message: "Account was created successfully"})
+    } else {
+        res.json({message: "An error has ocurred"})
+    }
 });
 
 // Get user data
