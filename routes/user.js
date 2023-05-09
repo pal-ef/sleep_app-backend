@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     );
     
     if(result) {
-        res.json({message: "Account was created successfully"})
+        res.json({message: "Account was created successfully", result})
     } else {
         res.json({message: "An error has ocurred"})
     }
