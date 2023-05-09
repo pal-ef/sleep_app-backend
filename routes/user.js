@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-
-
 // Get all users
 router.get("/", async (req, res) => {
     const [result] = await pool.query("SELECT * FROM users");
@@ -26,7 +24,7 @@ router.post("/", async (req, res) => {
 });
 
 // Get user data
-router.get("/:id", async (req, res) => {r
+router.get("/:id", async (req, res) => {
     const [result] = await pool.query("SELECT * FROM users WHERE id = ?", [
         req.params.id,
     ]);
