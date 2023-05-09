@@ -40,15 +40,19 @@ router.put("/:id", async (req, res) => {
 
     // If there's such user update the data
     if (user[0]) {
-        const firstName = req.body.firstName || user[0].firstName;
-        const lastName = req.body.firstName || user[0].firstName;
-        const phone = req.body.firstName || user[0].firstName;
+        const { username, name, phone } = req.body;
 
         const [result] = await pool.query(
-            "UPDATE users SET firstName = ?, lastName = ?, phone = ? WHERE ID = ?",
-            [firstName, lastName, phone, req.params.id]
+            "UPDATE users SET username = ?, name = ?, phone = ? WHERE ID = ?",
+            [username, name, phone, req.params.id]
         );
-        res.json(result[0]);
+
+        if(result) {
+            res.json(result);
+        } else {
+            res.status(500).json({message: "An error has ocurred"});
+        }
+
     } else {
         res.status(303).send("User was not found");
     }
