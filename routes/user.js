@@ -2,21 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../db");
 
-// Verify credentials (insecure)
-router.post("/credentials", async (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
 
-    const [result] = await pool.query(
-        "SELECT * FROM users WHERE username = ? AND password = ?",
-        [username, password]
-    );
-    if(result[0]) {
-        res.json(result[0]);
-    } else {
-        res.json({message:"user not found"});
-    }
-});
 
 // Get all users
 router.get("/", async (req, res) => {
@@ -31,12 +17,12 @@ router.post("/", async (req, res) => {
         `INSERT INTO users (username, name, phone, email, password) VALUES(?,?,?,?,?)`,
         [username, name, phone, email, password]
     );
-
-    res.json({result});
+    console.log(result)
+    res.status(200).send("User was created");
 });
 
 // Get user data
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {r
     const [result] = await pool.query("SELECT * FROM users WHERE id = ?", [
         req.params.id,
     ]);
@@ -81,6 +67,22 @@ router.delete("/:id", async (req, res) => {
         res.json(result[0]);
     } else {
         res.status(303).send("User does not exists");
+    }
+});
+
+// Verify credentials (insecure)
+router.post("/credentials", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    const [result] = await pool.query(
+        "SELECT * FROM users WHERE username = ? AND password = ?",
+        [username, password]
+    );
+    if(result[0]) {
+        res.json(result[0]);
+    } else {
+        res.json({message:"user not found"});
     }
 });
 
