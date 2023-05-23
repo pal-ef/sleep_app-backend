@@ -38,7 +38,7 @@ router.put("/:id", async (req, res) => {
         req.params.id,
     ]);
 
-    // If there's such user update the data
+    // If there's such user update the data!
     if (user[0]) {
         const { username, name, phone } = req.body;
 
